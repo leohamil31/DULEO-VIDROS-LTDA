@@ -2,7 +2,7 @@
 
 Site da Duleo Vidros: esquadrias de alumínio, vidros temperados e fabricação sob medida em Curitiba e região.
 
-**Site no ar (GitHub Pages):** https://leohamil31.github.io/duleo-vidros-ltda/
+**Site no ar (GitHub Pages):** https://leohamil31.github.io/DULEO-VIDROS-LTDA/
 
 ```
 index.html, produtos.html, sobre.html   páginas do site (estático, HTML/CSS/JS puro)
