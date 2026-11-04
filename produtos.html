@@ -4,101 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Produtos | Duleo Vidros</title>
-  <meta name="description" content="Esquadrias de alumínio, fachadas, guarda-corpos, brises, vidros temperados, box, fechamento de sacada e ACM sob medida em Curitiba e região.">
-  <meta name="theme-color" content="#08160f">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Produtos | Duleo Vidros">
-  <meta property="og:description" content="Esquadrias de alumínio, fachadas, guarda-corpos, brises, vidros temperados, box, fechamento de sacada e ACM sob medida em Curitiba e região.">
-  <meta property="og:image" content="img/hero.jpg">
+  <meta name="description" content="Esquadrias de alumínio, fachadas, guarda-corpos, vidros temperados, box, fechamento de sacada e coberturas sob medida.">
+  <meta name="theme-color" content="#0b2218">
   <link rel="icon" href="img/logo-mark.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="css/style.css?v=2">
-</head><body data-page="produtos">
-  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=39">
+</head>
+<body class="interna">
   <header class="nav" id="nav">
     <div class="container nav-in">
-      <a href="index.html" class="logo" aria-label="Duleo Vidros, página inicial"><img src="img/logo-mark.png" alt="" width="48" height="34"><b>DULEO<span>VIDROS</span></b></a>
+      <a href="index.html" class="logo" aria-label="Duleo Vidros"><span class="logo3d"><img src="img/logo-mark.png" alt="" width="52" height="37"></span><b>DULEO<span>VIDROS</span></b></a>
       <nav class="menu" id="menu" aria-label="Principal">
-        <a href="index.html">Início</a>
+        <a href="index.html">Home</a>
         <a href="sobre.html">Sobre nós</a>
         <div class="drop">
-          <div class="drop-row">
-            <a href="produtos.html" aria-current="page">Produtos</a>
-            <button class="drop-toggle" type="button" aria-expanded="false" aria-controls="drop-list" aria-label="Mostrar lista de produtos"><svg class="i" aria-hidden="true"><use href="img/icons.svg#chevron-down"/></svg></button>
-          </div>
-          <div class="drop-list" id="drop-list"><div></div></div>
+          <a href="produtos.html" class="drop-btn">Produtos <span aria-hidden="true">▾</span></a>
+          <div class="drop-list" id="drop-list"></div>
         </div>
+        <a href="index.html#contato">Orçamento</a>
         <a href="index.html#contato">Contato</a>
-        <a href="index.html#contato" class="btn menu-cta">Pedir orçamento grátis</a>
       </nav>
-      <a href="index.html#contato" class="btn btn-sm nav-cta">Pedir orçamento</a>
-      <button class="burger" id="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+      <a href="index.html#contato" class="btn btn-sm nav-cta">Entre em contato</a>
+      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
     </div>
   </header>
 
-  <main id="conteudo">
-    <section class="page-banner">
-      <div class="container">
-        <nav aria-label="Você está em"><ol class="crumbs"><li><a href="index.html">Início</a></li><li aria-current="page">Produtos</li></ol></nav>
-        <h1>Produtos</h1>
-        <p class="lead">Tudo sob medida, com fabricação própria e instalação. Escolha um produto para pedir o orçamento.</p>
-      </div>
-    </section>
+  <main>
+    <section class="page-banner"><div class="container"><h1>Produtos</h1></div></section>
 
     <section class="section">
-      <div class="container pgrid four" id="lista-produtos"></div>
+      <div class="container pgrid" id="lista-produtos"></div>
     </section>
 
     <section class="cta-faixa">
-      <div class="container reveal">
-        <h2>Não achou o que procura?</h2>
-        <p>Fazemos projetos especiais. Conte o que você precisa e a gente indica a melhor solução.</p>
-        <div class="hero-actions">
-          <a href="index.html#contato" class="btn">Pedir orçamento grátis <svg class="i i-move" aria-hidden="true"><use href="img/icons.svg#arrow-right"/></svg></a>
-          <a class="btn btn-ghost" data-wa href="https://wa.me/5541997953549" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="img/icons.svg#whatsapp"/></svg> Chamar no WhatsApp</a>
-        </div>
+      <div class="container">
+        <h2>Precisa desta solução?</h2>
+        <a href="index.html#contato" class="btn">Faça um orçamento</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">
-      <div class="foot">
-        <div>
-          <a href="index.html" class="logo"><img src="img/logo-mark.png" alt="" width="48" height="34"><b>DULEO<span>VIDROS</span></b></a>
-          <p>Esquadrias de alumínio e vidros sob medida, com fabricação própria em Curitiba e região desde 2012.</p>
-        </div>
-        <div>
-          <h3>Navegação</h3>
-          <ul><li><a href="index.html">Início</a></li><li><a href="sobre.html">Sobre nós</a></li><li><a href="produtos.html">Produtos</a></li><li><a href="index.html#contato">Pedir orçamento</a></li></ul>
-        </div>
-        <div>
-          <h3>Contato</h3>
-          <address><ul>
-            <li><a href="tel:+5541997953549">(41) 99795-3549</a></li>
-            <li>Seg. a sex., 8h às 18h</li>
-            <li>R. Carlos Kusma, Campestre da Faxina<br>São José dos Pinhais - PR</li>
-          </ul></address>
-        </div>
-      </div>
-      <div class="foot-bottom">
-        <small>&copy; <span data-ano>2026</span> Duleo Vidros Ltda. Todos os direitos reservados.</small>
-        <small>Curitiba e região metropolitana</small>
-      </div>
+    <div class="container foot">
+      <span class="logo"><img src="img/logo-mark.png" alt="" width="52" height="37"><b>DULEO<span>VIDROS</span></b></span>
+      <small>&copy; <span id="ano"></span> Duleo Vidros. Todos os direitos reservados.</small>
     </div>
   </footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <a class="float-wa" data-wa href="https://wa.me/5541997953549" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
-    <svg class="i" aria-hidden="true"><use href="img/icons.svg#whatsapp"/></svg><span class="tip" aria-hidden="true">Fale com a gente</span>
-  </a>
-
-  <script src="js/config.js?v=2"></script>
-  <script src="js/produtos.js?v=2"></script>
-  <script src="js/site.js?v=2"></script>
+  <script src="js/produtos.js?v=39"></script>
+  <script src="js/pagina.js?v=39"></script>
 </body>
 </html>

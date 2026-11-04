@@ -6,11 +6,11 @@ Site da Duleo Vidros: esquadrias de alumínio, vidros temperados e fabricação 
 
 ```
 index.html, produtos.html, sobre.html   páginas do site (estático, HTML/CSS/JS puro)
-css/style.css                           design system (tokens, componentes, estados)
+css/style.css                           estilos do site
 js/config.js                            WhatsApp, endereço, horário, modo do formulário
 js/produtos.js                          lista de produtos (fotos em img/produtos/<id>.jpg)
-js/site.js                              menu, dropdown, animações, formulário
-img/icons.svg                           set único de ícones (24px, traço 1.75)
+js/app.js                               página inicial: menu, produtos, formulário
+js/pagina.js                            páginas internas (produtos, sobre)
 backend/                                API opcional + painel admin (Node 22.13+, SQLite)
 ```
 
@@ -47,7 +47,7 @@ O servidor só entrega páginas `.html` da raiz e as pastas `css/`, `js/` e `img
 ## Fluxo do cliente
 
 - Todo "Pedir orçamento" de um produto leva ao formulário **já com o produto escolhido** (`index.html?produto=<id>#contato`).
-- O formulário valida nome e telefone (com máscara) e mostra os erros no campo, além de estado de carregamento e confirmação.
+- O telefone é formatado enquanto o cliente digita: (41) 99999-9999.
 - O site não exibe preços. Linha, cor, modelo e medidas são combinados pelo atendente.
 
 ## API (backend)

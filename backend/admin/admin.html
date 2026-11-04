@@ -4,37 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Painel administrativo | Duleo Vidros</title>
-  <link rel="icon" href="/img/logo-mark.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=2">
+  <title>Painel Administrativo | Duleo Vidros</title>
+  <link rel="stylesheet" href="/css/style.css?v=39">
 </head>
-<body class="admin">
-  <section id="login" class="login panel">
-    <span class="logo"><img src="/img/logo-mark.png" alt="" width="48" height="34"><b>DULEO<span>VIDROS</span></b></span>
-    <p class="muted" style="margin-bottom:20px">Acesso administrativo</p>
-    <form id="form-login" class="form">
-      <label class="field"><span>Senha</span><input type="password" id="senha" required autocomplete="current-password"></label>
+<body>
+  <section id="login" class="login card-form">
+    <h3 class="logo"><img src="/img/logo-mark.png" alt="" width="52" height="37"><b>DULEO<span>VIDROS</span></b></h3>
+    <p class="sub" style="margin:8px 0 20px">Acesso administrativo</p>
+    <form id="form-login">
+      <label>Senha<input type="password" id="senha" required autocomplete="current-password"></label>
       <p class="form-msg err" id="login-msg" role="alert"></p>
-      <button class="btn btn-block" type="submit">Entrar</button>
+      <button class="btn" type="submit">Entrar</button>
     </form>
   </section>
 
   <main id="painel" class="admin-wrap hidden">
     <div class="container">
-      <div class="admin-top">
-        <h1 style="font-size:1.6rem">Painel</h1>
-        <button class="btn btn-ghost btn-sm" id="sair" type="button">Sair</button>
+      <div class="foot">
+        <h2>Painel</h2>
+        <button class="btn btn-ghost btn-sm" id="sair">Sair</button>
       </div>
-      <div class="tabs" id="tabs" role="tablist">
-        <button type="button" role="tab" data-tab="contatos" aria-selected="true">Pedidos do site</button>
-        <button type="button" role="tab" data-tab="orcamentos" aria-selected="false">Orçamentos</button>
-        <button type="button" role="tab" data-tab="clientes" aria-selected="false">Clientes</button>
+      <div class="tabs" id="tabs">
+        <button data-tab="orcamentos" class="on">Orçamentos</button>
+        <button data-tab="contatos">Contatos</button>
+        <button data-tab="clientes">Clientes</button>
       </div>
-      <div class="table-wrap" aria-live="polite"><table id="tabela"></table></div>
+      <div class="table-wrap"><table id="tabela"></table></div>
     </div>
   </main>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/admin/admin.js?v=2"></script>
+  <script src="/admin/admin.js?v=39"></script>
 </body>
 </html>
