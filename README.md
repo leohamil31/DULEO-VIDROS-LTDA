@@ -30,11 +30,14 @@ Requer **Node 22.13+** (usa `node:sqlite`, sem `npm install`).
 
 ```powershell
 cd backend
-copy .env.example .env      # defina ADMIN_PASSWORD (sem ela o login fica desativado)
+copy .env.example .env
+node gerar-hash.js          # digite a senha do painel (mín. 16 caracteres) e cole o resultado em ADMIN_PASSWORD_HASH
 node --disable-warning=ExperimentalWarning server.js
 ```
 - Site: http://localhost:3000
 - Painel: http://localhost:3000/admin
+
+Em produção, publique atrás de um proxy com HTTPS (nginx, Caddy) e defina `TRUST_PROXY=1` no `.env`.
 
 O servidor só entrega páginas `.html` da raiz e as pastas `css/`, `js/` e `img/`. `backend/`, `.env`, `.git` e o banco nunca são servidos.
 
@@ -54,7 +57,8 @@ O servidor só entrega páginas `.html` da raiz e as pastas `css/`, `js/` e `img
 
 | Método | Rota | Acesso |
 |---|---|---|
-| POST | `/api/contatos`, `/api/orcamentos` | público |
-| POST | `/api/admin/login` | senha |
-| GET | `/api/admin/orcamentos`, `/contatos`, `/clientes` | token |
+| POST | `/api/contatos` (5 por 10 min por IP, só `application/json`) | público |
+| POST | `/api/admin/login` (bloqueio progressivo) | senha |
+| POST | `/api/admin/logout` | token |
+| GET | `/api/admin/orcamentos`, `/contatos`, `/clientes` | token (expira em 2h, ou 30 min sem uso) |
 | PATCH | `/api/admin/orcamentos/:id` (status), `/contatos/:id` (lido) | token |

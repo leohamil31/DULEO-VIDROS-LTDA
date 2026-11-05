@@ -18,6 +18,8 @@
   }
 
   function sair() {
+    // Revoga o token também no servidor (não basta apagar do navegador).
+    if (token) fetch('/api/admin/logout', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: '{}' }).catch(() => {});
     token = null; sessionStorage.removeItem('duleo_token');
     $('#painel').classList.add('hidden'); $('#login').classList.remove('hidden');
   }
