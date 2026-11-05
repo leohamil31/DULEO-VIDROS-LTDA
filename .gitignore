@@ -1,5 +1,7 @@
 backend/.env
 backend/data/
-node_modules/
+node_modules
+dist/
+.build/
 .DS_Store
 .vscode/

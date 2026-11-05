@@ -9,9 +9,9 @@ const { db, obterOuCriarCliente } = require('./db');
 
 const PORT = Number(process.env.PORT) || 3000;
 const TRUST_PROXY = process.env.TRUST_PROXY === '1'; // só ative atrás de um proxy reverso (nginx, Caddy...) que você controla
-const SITE_DIR = path.join(__dirname, '..');          // site estático (o mesmo publicado no GitHub Pages)
+const SITE_DIR = path.join(__dirname, '..', 'dist');  // site gerado por `npm run build` (o mesmo publicado no GitHub Pages)
 const ADMIN_DIR = path.join(__dirname, 'admin');      // painel: só existe quando o backend está rodando
-const PUBLICO = /^\/(?:[\w-]+\.html|(?:css|js|img)\/[\w./-]+)$/; // nada fora disso é servido (protege backend/, .env, .git)
+const PUBLICO = /^\/(?:[\w-]+\.html|robots\.txt|sitemap\.xml|(?:assets|img|fonts)\/[\w./-]+)$/; // nada fora disso é servido
 const MAX_BODY = 100 * 1024;
 const STATUS_VALIDOS = ['novo', 'em_analise', 'respondido', 'fechado', 'cancelado'];
 
@@ -36,6 +36,7 @@ const MIME = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
   '.js': 'application/javascript; charset=utf-8', '.svg': 'image/svg+xml',
   '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.ico': 'image/x-icon',
+  '.woff': 'font/woff', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml; charset=utf-8',
 };
 
 const securityHeaders = {
@@ -45,8 +46,8 @@ const securityHeaders = {
   // Ignorado pelo navegador em HTTP; vale quando o site é servido por HTTPS (proxy com TLS).
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
   'Content-Security-Policy':
-    "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-    "font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; " +
+    "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; " +
+    "font-src 'self'; img-src 'self' data:; connect-src 'self'; " +
     "frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'none'; " +
     "form-action 'self'; frame-ancestors 'none'",
 };
@@ -185,6 +186,8 @@ function validarCliente(b) {
 const routes = {
   'POST /api/contatos': async (req) => {
     const b = await readJson(req);
+    // Campo-armadilha preenchido = robô: responde como sucesso, mas não grava nada.
+    if (typeof b.empresa === 'string' && b.empresa.trim()) return [201, { ok: true }];
     const cliente = validarCliente(b);
     const mensagem = str(b.mensagem, 2000);
     if (mensagem.length < 3) throw fail('Escreva uma mensagem.');
@@ -272,7 +275,7 @@ function serveStatic(req, res, pathname) {
   if (pathname === '/') pathname = '/index.html';
   let base = SITE_DIR;
   if (pathname === '/admin' || pathname === '/admin/') { base = ADMIN_DIR; pathname = '/admin.html'; }
-  else if (pathname === '/admin/admin.js') { base = ADMIN_DIR; pathname = '/admin.js'; }
+  else if (pathname === '/admin/admin.js' || pathname === '/admin/admin.css') { base = ADMIN_DIR; pathname = pathname.slice(6); }
   else if (!PUBLICO.test(pathname) || pathname.includes('..')) return send(res, 404, 'Página não encontrada');
   const file = path.normalize(path.join(base, pathname));
   if (!file.startsWith(base + path.sep)) return send(res, 403, 'Acesso negado');
@@ -280,6 +283,8 @@ function serveStatic(req, res, pathname) {
     if (err) return send(res, 404, 'Página não encontrada');
     const headers = { 'Content-Type': MIME[path.extname(file)] || 'application/octet-stream' };
     if (base === ADMIN_DIR) { headers['X-Robots-Tag'] = 'noindex, nofollow'; headers['Cache-Control'] = 'no-store'; }
+    else if (pathname.startsWith('/assets/')) headers['Cache-Control'] = 'public, max-age=31536000, immutable'; // nome tem hash
+    else headers['Cache-Control'] = 'public, max-age=300';
     res.writeHead(200, { ...securityHeaders, ...headers });
     res.end(req.method === 'HEAD' ? undefined : data);
   });
@@ -299,6 +304,10 @@ const server = http.createServer(async (req, res) => {
 });
 server.requestTimeout = 30_000;
 server.headersTimeout = 15_000;
+
+if (!fs.existsSync(path.join(SITE_DIR, 'index.html'))) {
+  console.warn('ATENÇÃO: dist/ não encontrado. Rode "npm run build" na raiz do projeto antes de iniciar o servidor.');
+}
 
 server.listen(PORT, () => {
   console.log(`Duleo Vidros rodando em http://localhost:${PORT}  |  Admin: http://localhost:${PORT}/admin`);

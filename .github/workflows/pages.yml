@@ -1,4 +1,4 @@
-# Publica o site estático (raiz do repositório) no GitHub Pages a cada push na main.
+# Gera o site (React + TS + Tailwind, pré-renderizado) e publica dist/ no GitHub Pages a cada push na main.
 name: Publicar no GitHub Pages
 
 on:
@@ -16,20 +16,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Instalar dependências
+        run: npm install --no-audit --no-fund
+      - name: Checar tipos (TypeScript strict)
+        run: npm run typecheck
+      - name: Gerar site
+        run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - name: Montar pasta do site (sem backend)
-        run: |
-          mkdir _site
-          cp -r index.html produtos.html sobre.html css js img .nojekyll _site/
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
