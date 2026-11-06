@@ -73,3 +73,30 @@ export function usePointerFx<T extends HTMLElement>(ref: RefObject<T | null>, { 
     };
   }, [ref, tilt, magnetic]);
 }
+
+/**
+ * Links internos (#contato, #produtos...) rolam até a seção sem gravar o # no endereço.
+ * Assim, ao recarregar ou compartilhar o link, o site abre no topo.
+ */
+export function useAncorasLimpas() {
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = (e.target as Element | null)?.closest?.('a[href^="#"]');
+      const id = a?.getAttribute('href')?.slice(1);
+      const alvo = id ? document.getElementById(id) : null;
+      if (!alvo) return;
+      e.preventDefault();
+      alvo.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+      if (alvo.tabIndex >= 0 || alvo.hasAttribute('tabindex')) alvo.focus({ preventScroll: true }); // ex.: "Pular para o conteúdo"
+      if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    };
+    document.addEventListener('click', onClick);
+    // Chegou por um link com #secao (ex.: "Pedir orçamento" de outra página): depois de posicionar, limpa o endereço.
+    if (location.hash || location.search) {
+      const t = window.setTimeout(() => history.replaceState(null, '', location.pathname), 1500);
+      return () => { document.removeEventListener('click', onClick); window.clearTimeout(t); };
+    }
+    return () => document.removeEventListener('click', onClick);
+  }, []);
+}

@@ -32,7 +32,9 @@
   @keyframes rise { from { opacity: 0; transform: translate3d(0, 22px, 0); } }
 }
 
-@utility container-x { width: min(100% - 2.5rem, 80rem); margin-inline: auto;
+/* Margem lateral: 28px no celular, 40px no tablet, 48px+ no desktop. */
+@utility container-x { width: min(100% - 3.5rem, 80rem); margin-inline: auto;
+  @media (width >= 40rem) { width: min(100% - 5rem, 80rem); }
   @media (width >= 112rem) { width: min(100% - 6rem, 104rem); } }
 
 /* Vidro: superfície translúcida + borda com gradiente sutil (máscara) + brilho interno. */

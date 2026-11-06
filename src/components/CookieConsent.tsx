@@ -21,7 +21,7 @@ export function CookieConsent() {
       ref={ref}
       tabIndex={-1}
       aria-labelledby="cookies-titulo"
-      className="glass anim-rise fixed inset-x-3 bottom-3 z-[60] rounded-2xl p-5 outline-none sm:inset-x-auto sm:bottom-5 sm:left-5 sm:max-w-md"
+      className="glass anim-rise fixed inset-x-4 bottom-4 z-[60] rounded-2xl p-5 outline-none sm:inset-x-auto sm:bottom-5 sm:left-5 sm:max-w-md"
     >
       <div className="flex items-start gap-3">
         <span className="grid size-9 shrink-0 place-items-center rounded-full bg-brand-500/15 text-brand-300"><Icon name="cookie" size={18} /></span>

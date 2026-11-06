@@ -26,7 +26,7 @@ function Hero() {
       <div className="container-x grid items-end gap-10 lg:grid-cols-[1fr_auto]">
         <div className="max-w-3xl 3xl:max-w-5xl">
           <div className="anim-rise"><Eyebrow>Desde {SITE.fundacao} · Curitiba e região</Eyebrow></div>
-          <h1 id="hero-titulo" className="anim-rise text-balance font-display text-[2.6rem] font-semibold leading-[1.04] tracking-tight text-snow [animation-delay:90ms] sm:text-6xl lg:text-7xl 3xl:text-8xl">
+          <h1 id="hero-titulo" className="anim-rise text-balance font-display text-[2.3rem] font-semibold leading-[1.06] tracking-tight text-snow [animation-delay:90ms] sm:text-6xl lg:text-7xl 3xl:text-8xl">
             Especialistas em vidros e <span className="text-shine">esquadrias de alumínio</span>
           </h1>
           <p className="anim-rise mt-6 max-w-xl text-pretty text-lg leading-relaxed text-silver [animation-delay:180ms]">

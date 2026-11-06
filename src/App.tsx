@@ -4,7 +4,7 @@ import { CursorGlow } from './components/Fx';
 import { WhatsAppFab } from './components/Blocks';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
-import { useRevealOnScroll } from './lib/motion';
+import { useAncorasLimpas, useRevealOnScroll } from './lib/motion';
 import type { PageId } from './lib/routes';
 import { Home } from './pages/Home';
 import { Privacidade, Produtos, Sobre } from './pages/Inner';
@@ -13,6 +13,7 @@ const PAGINAS: Record<PageId, ComponentType> = { home: Home, produtos: Produtos,
 
 export function App({ page }: { page: PageId }) {
   useRevealOnScroll();
+  useAncorasLimpas();
   const Pagina = PAGINAS[page];
   return (
     <>
