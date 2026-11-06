@@ -121,6 +121,7 @@ export function head(page: PageId, assets: { css: string; js: string; preload: s
     '<meta name="robots" content="index, follow, max-image-preview:large">',
     '<meta name="theme-color" content="#050a07">',
     '<meta name="color-scheme" content="dark">',
+    ...(SITE.googleVerificacao ? [`<meta name="google-site-verification" content="${esc(SITE.googleVerificacao)}">`] : []),
     // GEO
     `<meta name="geo.region" content="BR-${SITE.endereco.uf}">`,
     `<meta name="geo.placename" content="${esc(SITE.endereco.cidade)}">`,

@@ -26,6 +26,8 @@ export const SITE = {
   // Cidades atendidas (usadas no JSON-LD "areaServed"). Acrescente as que a empresa atende.
   areaAtendida: ['Curitiba', 'São José dos Pinhais'],
   regiao: 'Região Metropolitana de Curitiba',
+  // Google Search Console > Adicionar propriedade > Prefixo do URL > Tag HTML: cole só o valor de content="..."
+  googleVerificacao: '',
   instagram: 'https://www.instagram.com/duleo_vidros/',
   facebook: 'https://www.facebook.com/duleovidros.duleo',
 } as const;
